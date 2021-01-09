@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 
-export function Home () {
+export function Reports () {
   return (
     <Fragment>
-      <div>Ready, steady, go!</div>
+      <div>Reports</div>
     </Fragment>
   )
 }
