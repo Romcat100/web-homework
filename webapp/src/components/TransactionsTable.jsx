@@ -2,45 +2,30 @@ import React from 'react'
 import { css } from '@emotion/core'
 import TransactionInput from './TransactionInput'
 import TransactionRow from './TransactionRow'
+import PropTypes from 'prop-types'
 
-export default function TransactionsTable () {
-  const transactions = getStartingTransactions()
-
+function TransactionsTable ({ transactions, setTransactions }) {
   return (
     <div css={containerStyle}>
       <h3>Transactions</h3>
       <div css={tableStyle}>
-        <TransactionInput />
-        {transactions.map((t, i) =>
-          <TransactionRow amount={t.amount} category={t.category} date={t.date} description={t.description} key={i} />
-        )}
+        <TransactionInput onSubmit={(t) => { setTransactions([t].concat(transactions)) }} />
+        <div className='table-body'>
+          {transactions.map((t, i) =>
+            <TransactionRow amount={t.amount} category={t.category} date={t.date} description={t.description} key={i} />
+          )}
+        </div>
       </div>
     </div>
   )
 }
 
-function getStartingTransactions () {
-  return [
-    {
-      amount: '$200',
-      category: 'Investments',
-      date: 'Jan 5, 2021',
-      description: 'ESG stocks'
-    },
-    {
-      amount: '$200',
-      category: 'Charity',
-      date: 'Jan 2, 2021',
-      description: 'Donations'
-    },
-    {
-      amount: '$400',
-      category: 'Bills',
-      date: 'Jan 1, 2021',
-      description: 'Water bill'
-    }
-  ]
+TransactionsTable.propTypes = {
+  transactions: PropTypes.array,
+  setTransactions: PropTypes.any
 }
+
+export default TransactionsTable
 
 const containerStyle = css`
   width: 800px;
@@ -117,5 +102,17 @@ const tableStyle = css`
     font-size: 100%;
     line-height: 1.3;
     margin: 0;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  .hidden {
+    opacity: 0;
+  }
+
+  .row:hover .hidden {
+    opacity: 1;
   }
 `

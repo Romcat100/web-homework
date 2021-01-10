@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { css } from '@emotion/core'
 import { Home } from './home'
 import { Reports } from './reports'
 
 function AppRouter () {
+  const [transactions, setTransactions] = useState(getStartingTransactions())
+
   return (
     <Router>
       <div css={layoutStyle}>
@@ -19,7 +21,7 @@ function AppRouter () {
           </ul>
         </nav>
         <div className='main-content' css={contentStyle}>
-          <Route component={Home} exact path='/' />
+          <Route component={() => <Home setTransactions={setTransactions} transactions={transactions} />} exact path='/' />
           <Route component={Reports} exact path='/reports' />
         </div>
       </div>
@@ -28,6 +30,29 @@ function AppRouter () {
 }
 
 export default AppRouter
+
+function getStartingTransactions () {
+  return [
+    {
+      amount: '200',
+      category: 'Investments',
+      date: '01/05/2021',
+      description: 'ESG stocks'
+    },
+    {
+      amount: '200',
+      category: 'Charity',
+      date: '01/02/2021',
+      description: 'Donations'
+    },
+    {
+      amount: '400',
+      category: 'Bills',
+      date: '01/01/2021',
+      description: 'Water bill'
+    }
+  ]
+}
 
 const layoutStyle = css`
     display: grid;
