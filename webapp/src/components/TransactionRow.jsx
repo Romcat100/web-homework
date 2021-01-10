@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 function TransactionRow ({ date, description, category, amount, onDelete }) {
   function formatDate (date) {
-    var timestamp = Date.parse(date)
-    var formattedDate = Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(timestamp)
+    const timestamp = Date.parse(date)
+    const formattedDate = Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(timestamp)
     return formattedDate
   }
 

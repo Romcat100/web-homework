@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 function TransactionsTable ({ transactions, setTransactions }) {
   function removeTransaction (i) {
-    var copy = [...transactions]
+    let copy = [...transactions]
     if (i !== -1) {
       copy.splice(i, 1)
       setTransactions(copy)
@@ -119,7 +119,7 @@ const tableStyle = css`
     padding: 0px;
     line-height: 0;
     height: 24px;
-    margin: 11px 14px 10px 30px;
+    margin: 11px 14px 10px 22px;
     opacity: 0;
   }
 
