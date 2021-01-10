@@ -37,15 +37,32 @@ const layoutStyle = css`
 
 const navStyle = css`
   grid-row: 1;
+  padding-top: 16px;
 
   & > ul {
       display: flex;
       flex-direction: row;
       list-style-type: none;
   }
-  
-  & > ul > li:not(:first-child) {
-    margin-left: 16px;
+
+  & > ul > li > a {
+    font-family: 'Calibri';
+    font-size: 18px;
+    font-weight: bold;
+    color: #3c3c3c;
+    text-decoration: none;
+  }
+
+  & > ul > li > a: hover {
+    text-decoration: underline;
+  }
+
+  & > ul > li:first-of-type {
+    margin-left: 60px;
+  }
+
+  & > ul > li:not(:first-of-type) {
+    margin-left: 40px;
   }
 `
 
