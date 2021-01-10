@@ -5,6 +5,14 @@ import TransactionRow from './TransactionRow'
 import PropTypes from 'prop-types'
 
 function TransactionsTable ({ transactions, setTransactions }) {
+  function removeTransaction (i) {
+    var copy = [...transactions]
+    if (i !== -1) {
+      copy.splice(i, 1)
+      setTransactions(copy)
+    }
+  }
+
   return (
     <div css={containerStyle}>
       <h3>Transactions</h3>
@@ -12,7 +20,7 @@ function TransactionsTable ({ transactions, setTransactions }) {
         <TransactionInput onSubmit={(t) => { setTransactions([t].concat(transactions)) }} />
         <div className='table-body'>
           {transactions.map((t, i) =>
-            <TransactionRow amount={t.amount} category={t.category} date={t.date} description={t.description} key={i} />
+            <TransactionRow amount={t.amount} category={t.category} date={t.date} description={t.description} key={i} onDelete={() => { removeTransaction(i) }} />
           )}
         </div>
       </div>
@@ -31,7 +39,7 @@ const containerStyle = css`
   width: 800px;
   height: 500px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 80px;
   padding: 20px 30px;
   background-color: white;
   border: 1px solid #ddd;
@@ -63,7 +71,6 @@ const tableStyle = css`
   }
 
   .row {
-    cursor: pointer;
     border-top: 1px solid #ddd;
   }
 
@@ -76,7 +83,7 @@ const tableStyle = css`
     overflow: hidden;
   }
 
-  .cell:first-of-type {
+  .cell:nth-of-type(1) {
     flex-basis: 25%;
   }
   .cell:nth-of-type(2) {
@@ -88,7 +95,7 @@ const tableStyle = css`
   .cell:nth-of-type(4) {
     flex-basis: 12%;
   }
-  .cell:nth-of-type(5) {
+  .cell:nth-child(5) {
     flex-basis: 3%;
     text-align: center;
   }
@@ -108,11 +115,15 @@ const tableStyle = css`
     cursor: pointer;
   }
 
-  .hidden {
+  .delete {
+    padding: 0px;
+    line-height: 0;
+    height: 24px;
+    margin: 11px 14px 10px 30px;
     opacity: 0;
   }
 
-  .row:hover .hidden {
+  .row:hover .delete {
     opacity: 1;
   }
 `

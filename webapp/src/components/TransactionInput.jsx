@@ -19,7 +19,7 @@ function TransactionInput ({ onSubmit }) {
     if (descriptionInput.current.value === '') {
       invalidFields.push(descriptionInput)
     }
-    if (dateInput.current.value === '') {
+    if (dateInput.current.value === '' || isNaN(Date.parse(dateInput.current.value))) {
       invalidFields.push(dateInput)
     }
 
@@ -53,7 +53,7 @@ function TransactionInput ({ onSubmit }) {
 
   return (
     <div className='input-row'>
-      <div className='cell'><input ref={dateInput} type='date' /></div>
+      <div className='cell'><input placeholder='Date' ref={dateInput} type='date' /></div>
       <div className='cell'><input placeholder='Description' ref={descriptionInput} /></div>
       <div className='cell'><select ref={categoryInput}>
         <option value=''>Category</option>
