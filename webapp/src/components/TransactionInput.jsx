@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -50,6 +51,26 @@ function TransactionInput ({ onSubmit }) {
     dateInput.current.value = ''
     descriptionInput.current.value = ''
   }
+
+  // Command-B hotkey easter egg
+  const handleKeyDown = (event) => {
+    if (event.key === 'b' && event.metaKey) {
+      axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((res) => {
+        onSubmit({
+          amount: parseInt(res.data.bpi.USD.rate_float).toString(),
+          category: 'Investments',
+          date: new Date().toJSON().slice(0, 10),
+          description: '1 Bitcoin'
+        })
+      })
+    }
+  }
+  React.useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
 
   return (
     <div className='input-row'>
