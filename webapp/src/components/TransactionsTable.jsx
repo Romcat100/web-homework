@@ -120,10 +120,5 @@ const tableStyle = css`
     line-height: 0;
     height: 24px;
     margin: 11px 14px 10px 22px;
-    opacity: 0;
-  }
-
-  .row:hover .delete {
-    opacity: 1;
   }
 `

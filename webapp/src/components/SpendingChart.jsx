@@ -15,7 +15,7 @@ function SpendingChart ({ transactions, useRomanNumerals }) {
   let categoryLabels = []
   for (const [key, value] of Object.entries(categories)) {
     amountSeries.push(value)
-    const displayAmount = useRomanNumerals ? convertToRomanNumerals(value) : value
+    const displayAmount = useRomanNumerals ? convertToRomanNumerals(value) : parseFloat(value).toLocaleString()
     categoryLabels.push(`${key} ($${displayAmount})`)
   }
 

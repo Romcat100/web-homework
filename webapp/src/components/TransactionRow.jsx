@@ -13,7 +13,7 @@ function TransactionRow ({ date, description, category, amount, onDelete }) {
       <div className='cell'>{ formatDate(date) }</div>
       <div className='cell'>{ description }</div>
       <div className='cell'>{ category }</div>
-      <div className='cell'>${ amount }</div>
+      <div className='cell'>${ parseFloat(amount).toLocaleString() }</div>
       <button className='cell delete' onClick={onDelete}>&#10005;</button>
     </div>
   )
